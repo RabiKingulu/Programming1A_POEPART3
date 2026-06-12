@@ -166,6 +166,48 @@ public class MessageApp {
                 }
             }
             JOptionPane.showMessageDialog(null, "Longest Stored Message:\n" + longest);
+			        
+		} else if (input.equals("c")) {
+            String searchId = JOptionPane.showInputDialog("Enter Message ID to search:");
+            if (searchId == null) return;
+            searchId = searchId.trim();
+            
+            boolean found = false;
+            for (int i = 0; i < arrayCounter; i++) {
+                if (messageIds[i] != null && messageIds[i].equalsIgnoreCase(searchId)) {
+                    String msgText = sentMessages[i] != null ? sentMessages[i] : 
+                                     (storedMessages[i] != null ? storedMessages[i] : disregardedMessages[i]);
+                    JOptionPane.showMessageDialog(null, "Message Found!\nRecipient: " + recipients[i] + "\nMessage: " + msgText);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Message ID not found.");
+            }
+
+        } else if (input.equals("d")) {
+            String searchRecipient = JOptionPane.showInputDialog("Enter Recipient Number to search:");
+            if (searchRecipient == null) return;
+            searchRecipient = searchRecipient.trim();
+            
+            String results = "Messages for " + searchRecipient + ":\n";
+            boolean found = false;
+            for (int i = 0; i < arrayCounter; i++) {
+                if (recipients[i] != null && recipients[i].equals(searchRecipient)) {
+                    String msgText = sentMessages[i] != null ? sentMessages[i] : 
+                                     (storedMessages[i] != null ? storedMessages[i] : disregardedMessages[i]);
+                    if (msgText != null) {
+                        results += "- " + msgText + "\n";
+                        found = true;
+                    }
+                }
+            }
+            if (found) {
+                JOptionPane.showMessageDialog(null, results);
+            } else {
+                JOptionPane.showMessageDialog(null, "No messages found for this recipient.");
+            }
 
         } else if (input.equals("f")) {
             String report = "--- FULL TRANSMISSION REPORT ---\n";
