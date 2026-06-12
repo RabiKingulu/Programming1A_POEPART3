@@ -76,7 +76,7 @@ public class MessageApp {
         }
     }
 
-        private static void handleNewMessageInput() {
+    private static void handleNewMessageInput() {
         if (arrayCounter >= 100) {
             JOptionPane.showMessageDialog(null, "Storage full.");
             return;
@@ -134,8 +134,9 @@ public class MessageApp {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "File error.");
         }
-    } 
-	    private static void handleReportSubMenu() {
+    }
+
+    private static void handleReportSubMenu() {
         String subMenuText = "Stored Messages Report Sub-Menu:\n" +
                              "a. Display sender and recipient of stored messages\n" +
                              "b. Display longest stored message\n" +
@@ -166,8 +167,8 @@ public class MessageApp {
                 }
             }
             JOptionPane.showMessageDialog(null, "Longest Stored Message:\n" + longest);
-			        
-		} else if (input.equals("c")) {
+
+        } else if (input.equals("c")) {
             String searchId = JOptionPane.showInputDialog("Enter Message ID to search:");
             if (searchId == null) return;
             searchId = searchId.trim();
@@ -207,8 +208,9 @@ public class MessageApp {
                 JOptionPane.showMessageDialog(null, results);
             } else {
                 JOptionPane.showMessageDialog(null, "No messages found for this recipient.");
-            } 
-		} else if (input.equals("e")) {
+            }
+
+        } else if (input.equals("e")) {
             String searchHash = JOptionPane.showInputDialog("Enter Message Hash to delete:");
             if (searchHash == null) return;
             searchHash = searchHash.trim();
@@ -221,7 +223,8 @@ public class MessageApp {
                     messageHashes[i] = null;
                     sentMessages[i] = null;
                     storedMessages[i] = null;
-                    disregardedMessages[i] = null; 
+                    disregardedMessages[i] = null;
+                    
                     JOptionPane.showMessageDialog(null, "Message successfully deleted from system.");
                     found = true;
                     break;
@@ -230,6 +233,7 @@ public class MessageApp {
             if (!found) {
                 JOptionPane.showMessageDialog(null, "Message Hash not found.");
             }
+
         } else if (input.equals("f")) {
             String report = "--- FULL TRANSMISSION REPORT ---\n";
             for (int i = 0; i < arrayCounter; i++) {
@@ -253,7 +257,7 @@ public class MessageApp {
             JOptionPane.showMessageDialog(null, report);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Feature coming in next commit or invalid input.");
+            JOptionPane.showMessageDialog(null, "Invalid selection.");
         }
     }
 
@@ -289,6 +293,3 @@ public class MessageApp {
         arrayCounter++;
     }
 }
-
-					
-
