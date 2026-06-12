@@ -288,6 +288,7 @@ public class MessageApp {
         messageHashes[4] = "MS:5:OKYOU";
         arrayCounter++;
     }
+}
 
 					
 
