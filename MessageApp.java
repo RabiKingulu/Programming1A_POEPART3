@@ -134,6 +134,64 @@ public class MessageApp {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "File error.");
         }
+    } 
+	    private static void handleReportSubMenu() {
+        String subMenuText = "Stored Messages Report Sub-Menu:\n" +
+                             "a. Display sender and recipient of stored messages\n" +
+                             "b. Display longest stored message\n" +
+                             "c. Search for a message ID\n" +
+                             "d. Search all messages for a recipient\n" +
+                             "e. Delete a message using hash\n" +
+                             "f. Display full report\n\n" +
+                             "Enter choice (a-f):";
+        
+        String input = JOptionPane.showInputDialog(subMenuText);
+        if (input == null) return;
+        input = input.trim().toLowerCase();
+
+        if (input.equals("a")) {
+            String output = "Stored Messages (Recipient Info):\n";
+            for (int i = 0; i < arrayCounter; i++) {
+                if (storedMessages[i] != null) {
+                    output += "Recipient: " + recipients[i] + "\n";
+                }
+            }
+            JOptionPane.showMessageDialog(null, output);
+
+        } else if (input.equals("b")) {
+            String longest = "";
+            for (int i = 0; i < arrayCounter; i++) {
+                if (storedMessages[i] != null && storedMessages[i].length() > longest.length()) {
+                    longest = storedMessages[i];
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Longest Stored Message:\n" + longest);
+
+        } else if (input.equals("f")) {
+            String report = "--- FULL TRANSMISSION REPORT ---\n";
+            for (int i = 0; i < arrayCounter; i++) {
+                String status = "Disregarded";
+                String msgText = disregardedMessages[i];
+                if (sentMessages[i] != null) {
+                    status = "Sent";
+                    msgText = sentMessages[i];
+                } else if (storedMessages[i] != null) {
+                    status = "Stored";
+                    msgText = storedMessages[i];
+                }
+                
+                if (msgText != null) {
+                    report += "ID: " + messageIds[i] + " | Status: " + status + "\n" +
+                              "Recipient: " + recipients[i] + "\n" +
+                              "Message: " + msgText + "\n" +
+                              "Hash: " + messageHashes[i] + "\n---------------------\n";
+                }
+            }
+            JOptionPane.showMessageDialog(null, report);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Feature coming in next commit or invalid input.");
+        }
     }
 
     public static void populateTestData() {
