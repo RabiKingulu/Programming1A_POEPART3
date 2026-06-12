@@ -207,8 +207,29 @@ public class MessageApp {
                 JOptionPane.showMessageDialog(null, results);
             } else {
                 JOptionPane.showMessageDialog(null, "No messages found for this recipient.");
-            }
+            } 
+		} else if (input.equals("e")) {
+            String searchHash = JOptionPane.showInputDialog("Enter Message Hash to delete:");
+            if (searchHash == null) return;
+            searchHash = searchHash.trim();
 
+            boolean found = false;
+            for (int i = 0; i < arrayCounter; i++) {
+                if (messageHashes[i] != null && messageHashes[i].equalsIgnoreCase(searchHash)) {
+                    messageIds[i] = null;
+                    recipients[i] = null;
+                    messageHashes[i] = null;
+                    sentMessages[i] = null;
+                    storedMessages[i] = null;
+                    disregardedMessages[i] = null; 
+                    JOptionPane.showMessageDialog(null, "Message successfully deleted from system.");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Message Hash not found.");
+            }
         } else if (input.equals("f")) {
             String report = "--- FULL TRANSMISSION REPORT ---\n";
             for (int i = 0; i < arrayCounter; i++) {
@@ -267,4 +288,6 @@ public class MessageApp {
         messageHashes[4] = "MS:5:OKYOU";
         arrayCounter++;
     }
+
+					
 
